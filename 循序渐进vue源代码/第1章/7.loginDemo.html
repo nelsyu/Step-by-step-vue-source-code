@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+</head>
+<body>
+    <div id="Application" style="text-align: center;">
+        <!-- 标题 -->
+        <h1 id="title">欢迎您：未登录</h1>
+        <!-- 创建账号和密码输入组件 -->
+        <div id="userName">账号：<input id="userNameInput" type="text" /></div>
+        <div id="password">密码：<input id="passwordInput" type="password" /></div>
+        <!-- 登录按钮 -->
+        <div id="button" style="border-radius: 30px;width: 100px; margin: 20px auto; color: white; background-color: blue;">登录</div>
+    </div>
+    <script>
+        var titleElement = document.getElementById("title");
+        var userNameElement = document.getElementById("userName");
+        var passwordElement = document.getElementById("password");
+        var buttonElement = document.getElementById("button");
+        var userNameInput = document.getElementById("userNameInput");
+        var passwordInput = document.getElementById("passwordInput");
+
+        var noLogin = true
+
+        buttonElement.addEventListener("click", function(){
+            if (noLogin) {
+                login()
+            } else {
+                logout()
+            }
+        })    
+
+        userNameInput.addEventListener("change", function(event){
+            userName = event.target.value
+        })
+
+        passwordInput.addEventListener("change", function(event){
+            password = event.target.value
+        })
+
+
+
+       // 登录
+        function login() {
+            // 判断账号密码是否为空
+            if (userName.length > 0 && password.length > 0) {
+                // 登录提示后刷新页面
+                alert(`userNmae:${userName} password:${password}`)
+                noLogin = false
+                titleElement.innerText = `欢迎您:${userName}`
+                buttonElement.innerText = "注销"
+                userName = ""
+                password = ""
+                userNameElement.style.visibility = "hidden"
+                passwordElement.style.visibility = "hidden" 
+            } else {
+                alert("请输入账号密码")
+            }
+        }
+        // 登出
+        function logout() {
+            // 清空登录数据
+            noLogin = true
+            titleElement.innerText = `欢迎您:未登录`
+            buttonElement.innerText = "登录"
+            userNameInput.value = ""
+            passwordInput.value = ""
+            userNameElement.style.visibility = "visible"
+            passwordElement.style.visibility = "visible" 
+        }
+    </script>
+    
+</body>
+</html>
